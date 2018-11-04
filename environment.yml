@@ -1,0 +1,7 @@
+name: object-detector
+channels:
+- defaults
+dependencies:
+- python=3.7
+- opencv==3.4.2
+- numpy==1.15.3
