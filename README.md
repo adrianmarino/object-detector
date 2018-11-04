@@ -23,5 +23,5 @@ source activate object-detector
 **Step 3:** Run detector.
 
 ```bash
-python object-detector.py --input-image /path/to/image.png --output ./output.png
+python test.py --input-video input/videos/videoplayback.mp4 --output output/videos/output.mp4
 ```
