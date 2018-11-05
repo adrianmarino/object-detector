@@ -1,6 +1,6 @@
 #  object-detector
 
-Detect objects in images, videos and webcam streaming videos.
+Detect objects in images, videos and webcam streaming.
 
 ## Requeriments
 
@@ -24,4 +24,14 @@ source activate object-detector
 
 ```bash
 python object-detector.py --input-video input/videos/videoplayback.mp4 --output output/videos/video.mp4
+```
+
+
+## Fix errors
+
+# ...window.cpp:698: error: (-2:Unspecified error) The function is not implemented. 
+
+```bash
+pip install --upgrade pip
+pip install opencv-contrib-python
 ```
