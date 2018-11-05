@@ -1,6 +1,6 @@
 #  object-detector
 
-Detect objects in images, videos and webcam streaming.
+Detect objects in images, videos and webcam streaming (Under construction)
 
 ## Requeriments
 
