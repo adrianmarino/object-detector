@@ -29,7 +29,7 @@ python object-detector.py --input-video input/videos/videoplayback.mp4 --output 
 
 ## Fix errors
 
-# ...window.cpp:698: error: (-2:Unspecified error) The function is not implemented. 
+#### ...window.cpp:698: error: (-2:Unspecified error) The function is not implemented. 
 
 ```bash
 pip install --upgrade pip

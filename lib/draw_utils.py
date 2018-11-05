@@ -14,7 +14,7 @@ def write_fps(frame, value):
         org=(10, 45), 
         fontFace=cv2.FONT_HERSHEY_DUPLEX,
         fontScale=1.8, 
-        color=(0, 0, 124), 
+        color=(255, 255, 255),
         thickness=2
     )
 
