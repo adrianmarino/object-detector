@@ -1,5 +1,6 @@
 from timeit import default_timer as timer
 
+
 class FpsCalculator:
     def __init__(self):
         self.accum_time = 0

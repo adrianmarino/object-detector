@@ -5,7 +5,7 @@ from PIL import ImageFont, Image
 from lib.draw_utils import get_boxed_image, draw_bounding_box
 
 
-class YOLONetwork(object):
+class ObjectDetector(object):
     def __init__(
             self,
             class_names,

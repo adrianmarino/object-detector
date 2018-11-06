@@ -2,8 +2,8 @@ from lib.input import InputParamsResolver
 from lib.video import VideoCaptureFactory
 from lib.video import VideoWriterFactory
 from lib.fps_calculator import FpsCalculator
-from lib.yolo.yolo_network_factory import YOLONetworkFactory
-from lib.yolo.settings import Settings
+from lib.object_detector_factory import ObjectDetectorFactory
+from lib.settings import Settings
 
 import lib.draw_utils as draw_utils
 import numpy as np
@@ -12,11 +12,13 @@ import sys
 
 preview_width = 2400
 params = InputParamsResolver.resolve()
+
 video_capture = VideoCaptureFactory.create(params)
 video_writer = VideoWriterFactory.create(video_capture, params)
 fps_calculator = FpsCalculator()
+
 settings = Settings()
-network = YOLONetworkFactory().create(settings)
+object_detector = ObjectDetectorFactory.create(settings)
 
 
 def write_output(frame, params):
@@ -38,11 +40,15 @@ def next_frame(video_capture, params):
     hasFrame, frame = video_capture.read() 
     if not hasFrame:
         stop_processing(params)
-    return hasFrame, frame 
+    return hasFrame, frame
+
+
+def process_frame(frame):
+    return object_detector.predict_bounding_boxes(frame) if params['predict_bounding_boxes'] else frame
 
 
 while cv2.waitKey(1) < 0:
     hasFrame, input_frame = next_frame(video_capture, params)
-    output_frame = network.predict_bounding_boxes(input_frame)
+    output_frame = process_frame(input_frame)
     draw_utils.show_frame(output_frame, fps_calculator, preview_width)
     write_output(output_frame, params)

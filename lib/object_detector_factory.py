@@ -1,6 +1,6 @@
-from lib.yolo.model import yolo_eval, yolo_body, tiny_yolo_body
-from lib.yolo.settings import Settings
-from lib.yolo.yolo_network import YOLONetwork
+from lib.yolo import yolo_eval, yolo_body, tiny_yolo_body
+from lib.settings import Settings
+from lib.object_detector import ObjectDetector
 
 from keras import backend as K
 from keras.models import load_model
@@ -12,7 +12,7 @@ import colorsys
 import os
 
 
-class YOLONetworkFactory:
+class ObjectDetectorFactory:
     @classmethod
     def create(cls, settings=Settings()):
         anchors = cls._get_anchors(settings.anchors_path)
@@ -32,7 +32,7 @@ class YOLONetworkFactory:
             iou_threshold=settings.iou
         )
 
-        return YOLONetwork(
+        return ObjectDetector(
             class_names,
             anchors,
             boxes,

@@ -29,7 +29,7 @@ source activate object-detector
 **Step 4:** Run detector.
 
 ```bash
-python object-detector.py --input-video input/videos/videoplayback.mp4 --output output/videos/video.mp4
+python object-detector.py --input-video input.mp4 --output output.mp4 --predict-bounding-boxes
 ```
 
 
