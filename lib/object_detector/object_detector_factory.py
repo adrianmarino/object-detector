@@ -1,6 +1,6 @@
 from lib.yolo import yolo_eval, yolo_body, tiny_yolo_body
-from lib.settings import Settings
-from lib.object_detector import ObjectDetector
+from lib.object_detector.settings import Settings
+from lib.object_detector.object_detector import ObjectDetector
 
 from keras import backend as K
 from keras.models import load_model

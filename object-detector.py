@@ -2,8 +2,8 @@ from lib.input import InputParamsResolver
 from lib.video import VideoCaptureFactory
 from lib.video import VideoWriterFactory
 from lib.fps_calculator import FpsCalculator
-from lib.object_detector_factory import ObjectDetectorFactory
-from lib.settings import Settings
+from lib.object_detector.object_detector_factory import ObjectDetectorFactory
+from lib.object_detector.settings import Settings
 
 import lib.draw_utils as draw_utils
 import numpy as np
