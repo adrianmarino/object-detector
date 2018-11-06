@@ -13,11 +13,12 @@ import os
 
 
 class YOLONetworkFactory:
-    def create(self, settings=Settings()):
-        anchors = self._get_anchors(settings.anchors_path)
-        class_names = self._get_class(settings.classes_path)
-        model = self._create_model(anchors, class_names, settings)
-        colors = self._get_class_colors(class_names)
+    @classmethod
+    def create(cls, settings=Settings()):
+        anchors = cls._get_anchors(settings.anchors_path)
+        class_names = cls._get_class(settings.classes_path)
+        model = cls._create_model(anchors, class_names, settings)
+        colors = cls._get_class_colors(class_names)
 
         # Generate output tensor targets for filtered bounding boxes.
         input_image_shape = K.placeholder(shape=(2,))

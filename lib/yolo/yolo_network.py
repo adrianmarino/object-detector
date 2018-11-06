@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from keras import backend as K
-
-from PIL import ImageFont, ImageDraw, Image
-
-from lib.draw_utils import letterbox_image
+from PIL import ImageFont, Image
+from lib.draw_utils import get_boxed_image, draw_bounding_box
 
 
 class YOLONetwork(object):
@@ -31,21 +29,26 @@ class YOLONetwork(object):
         self.model_image_size = model_image_size
         self.sess = K.get_session()
 
-    def predict(self, frame):
-        image = Image.fromarray(frame)
+    def predict_bounding_boxes(self, image):
+        image = Image.fromarray(image)
+        out_boxes, out_classes, out_scores = self._predict(image)
+        self.draw_bounding_boxes(image, out_boxes, out_classes, out_scores)
+        return np.asarray(image)
 
-        if self.model_image_size != (None, None):
-            assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
-            assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
-            boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
-        else:
-            new_image_size = (
-                image.width - (image.width % 32),
-                image.height - (image.height % 32)
-            )
-            boxed_image = letterbox_image(image, new_image_size)
+    def draw_bounding_boxes(self, image, out_boxes, out_classes, out_scores):
+        font = self._create_font(image)
+        thickness = (image.size[0] + image.size[1]) // 800
+        for index, clazz in reversed(list(enumerate(out_classes))):
+            predicted_class = self.class_names[clazz]
+            box = out_boxes[index]
+            score = out_scores[index]
+            color = self.colors[clazz]
+            draw_bounding_box(box, color, font, image, predicted_class, score, thickness)
+
+    def _predict(self, image):
+        boxed_image = get_boxed_image(image, self.model_image_size)
+
         image_data = np.array(boxed_image, dtype='float32')
-
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 
@@ -56,58 +59,13 @@ class YOLONetwork(object):
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
+        return out_boxes, out_classes, out_scores
 
-        font = ImageFont.truetype(
+    @staticmethod
+    def _create_font(image):
+        return ImageFont.truetype(
             font='model_data/font/FiraMono-Medium.otf',
             size=np.floor(2e-2 * image.size[1] + 0.5).astype('int32')
         )
-        thickness = (image.size[0] + image.size[1]) // 800
 
-        for i, c in reversed(list(enumerate(out_classes))):
-            predicted_class = self.class_names[c]
-            box = out_boxes[i]
-            score = out_scores[i]
-
-            label = '{} {:.0f}%'.format(predicted_class, score * 100)
-            draw = ImageDraw.Draw(image)
-            label_size = draw.textsize(label, font)
-
-            top, left, bottom, right = box
-            top = max(0, np.floor(top + 0.5).astype('int32'))
-            left = max(0, np.floor(left + 0.5).astype('int32'))
-            bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
-            right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
-
-            if top - label_size[1] >= 0:
-                text_origin = np.array([left, top - label_size[1]])
-            else:
-                text_origin = np.array([left, top])
-
-            # My kingdom for a good redistributable image drawing library.
-            for i in range(thickness):
-                draw.rectangle(
-                    [
-                        left + i,
-                        top + i,
-                        right - i,
-                        bottom - i
-                    ],
-                    outline=self.colors[c],
-                    width=1
-                )
-
-            draw.rectangle(
-                [
-                    tuple(text_origin),
-                    tuple(text_origin + label_size)
-                ],
-                fill=self.colors[c],
-                width=1
-            )
-            draw.text(text_origin, label.capitalize(), fill=(0, 0, 0), font=font)
-            del draw
-
-        return np.asarray(image)
-
-    def close(self):
-        self.sess.close()
+    def close(self): self.sess.close()

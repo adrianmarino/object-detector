@@ -1,6 +1,6 @@
 from lib.input import InputParamsResolver 
-from lib.video import VideCaptureFactory
-from lib.video import VideWriterFactory
+from lib.video import VideoCaptureFactory
+from lib.video import VideoWriterFactory
 from lib.fps_calculator import FpsCalculator
 from lib.yolo.yolo_network_factory import YOLONetworkFactory
 from lib.yolo.settings import Settings
@@ -12,8 +12,8 @@ import sys
 
 preview_width = 2400
 params = InputParamsResolver.resolve()
-video_capture = VideCaptureFactory().create(params)
-video_writer = VideWriterFactory().create(video_capture, params)
+video_capture = VideoCaptureFactory.create(params)
+video_writer = VideoWriterFactory.create(video_capture, params)
 fps_calculator = FpsCalculator()
 settings = Settings()
 network = YOLONetworkFactory().create(settings)
@@ -43,6 +43,6 @@ def next_frame(video_capture, params):
 
 while cv2.waitKey(1) < 0:
     hasFrame, input_frame = next_frame(video_capture, params)
-    output_frame = network.predict(input_frame)
+    output_frame = network.predict_bounding_boxes(input_frame)
     draw_utils.show_frame(output_frame, fps_calculator, preview_width)
     write_output(output_frame, params)
