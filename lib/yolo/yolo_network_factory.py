@@ -1,4 +1,3 @@
-from lib.yolo.utils import get_anchors, get_class
 from lib.yolo.model import yolo_eval, yolo_body, tiny_yolo_body
 from lib.yolo.settings import Settings
 from lib.yolo.yolo_network import YOLONetwork
@@ -14,10 +13,9 @@ import os
 
 
 class YOLONetworkFactory:
-    @classmethod
-    def create(cls, settings=Settings()):
-        anchors = get_anchors(settings.anchors_path)
-        class_names = get_class(settings.classes_path)
+    def create(self, settings=Settings()):
+        anchors = self._get_anchors(settings.anchors_path)
+        class_names = self._get_class(settings.classes_path)
 
         model_path = os.path.expanduser(settings.model_path)
         assert model_path.endswith('.h5'), 'Keras model or weights must be a .h5 file.'
@@ -78,3 +76,19 @@ class YOLONetworkFactory:
             colors,
             settings.model_image_size
         )
+
+    @staticmethod
+    def _get_class(classes_path):
+        classes_path = os.path.expanduser(classes_path)
+        with open(classes_path) as f:
+            class_names = f.readlines()
+        class_names = [c.strip() for c in class_names]
+        return class_names
+
+    @staticmethod
+    def _get_anchors(path):
+        path = os.path.expanduser(path)
+        with open(path) as f:
+            anchors = f.readline()
+        anchors = [float(x) for x in anchors.split(',')]
+        return np.array(anchors).reshape(-1, 2)

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from keras import backend as K
+
 from PIL import ImageFont, ImageDraw, Image
 
-from lib.yolo.utils import letterbox_image
-
+from lib.draw_utils import letterbox_image
 
 class YOLONetwork(object):
     def __init__(

@@ -16,7 +16,7 @@ video_capture = VideCaptureFactory().create(params)
 video_writer = VideWriterFactory().create(video_capture, params)
 fps_calculator = FpsCalculator()
 settings = Settings()
-network = YOLONetworkFactory.create(settings)
+network = YOLONetworkFactory().create(settings)
 
 
 def write_output(frame, params):
