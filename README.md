@@ -20,7 +20,13 @@ conda env create --file environment.yml
 source activate object-detector
 ```
 
-**Step 3:** Run detector.
+**Step 3:** Extract network weights.
+
+```bash
+7z x  model_data/yolo.h5.7z.001 -o./model_data 
+```
+
+**Step 4:** Run detector.
 
 ```bash
 python object-detector.py --input-video input/videos/videoplayback.mp4 --output output/videos/video.mp4

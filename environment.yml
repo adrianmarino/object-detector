@@ -2,6 +2,9 @@ name: object-detector
 channels:
 - defaults
 dependencies:
-- python=3.7
-- opencv==3.4.2
-- numpy==1.15.3
+- python=3.6
+- opencv=3.4.2
+- tensorflow-gpu
+- keras
+- pillow
+- matplotlib
