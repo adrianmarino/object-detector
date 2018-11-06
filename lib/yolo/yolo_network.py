@@ -6,6 +6,7 @@ from PIL import ImageFont, ImageDraw, Image
 
 from lib.draw_utils import letterbox_image
 
+
 class YOLONetwork(object):
     def __init__(
             self,
@@ -15,7 +16,7 @@ class YOLONetwork(object):
             scores,
             classes,
             input_image_shape,
-            yolo_model,
+            model,
             colors,
             model_image_size
     ):
@@ -25,7 +26,7 @@ class YOLONetwork(object):
         self.scores = scores
         self.classes = classes
         self.input_image_shape = input_image_shape
-        self.yolo_model = yolo_model
+        self.model = model
         self.colors = colors
         self.model_image_size = model_image_size
         self.sess = K.get_session()
@@ -51,7 +52,7 @@ class YOLONetwork(object):
         out_boxes, out_scores, out_classes = self.sess.run(
             [self.boxes, self.scores, self.classes],
             feed_dict={
-                self.yolo_model.input: image_data,
+                self.model.input: image_data,
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
