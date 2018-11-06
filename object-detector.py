@@ -2,8 +2,8 @@ from lib.input import InputParamsResolver
 from lib.video import VideCaptureFactory
 from lib.video import VideWriterFactory
 from lib.fps_calculator import FpsCalculator
-from lib.yolo import YOLO
-from PIL import Image
+from lib.yolo.yolo_network_factory import YOLONetworkFactory
+from lib.yolo.settings import Settings
 
 import lib.draw_utils as draw_utils
 import numpy as np
@@ -15,7 +15,8 @@ params = InputParamsResolver.resolve()
 video_capture = VideCaptureFactory().create(params)
 video_writer = VideWriterFactory().create(video_capture, params)
 fps_calculator = FpsCalculator()
-yolo = YOLO()
+settings = Settings()
+network = YOLONetworkFactory.create(settings)
 
 
 def write_output(frame, params):
@@ -26,7 +27,7 @@ def write_output(frame, params):
 
 
 def stop_processing(params):
-    print("Done processing !!!")
+    print("End processing!")
     print("Output file is stored as ", params['output'])
     cv2.destroyAllWindows()
     cv2.waitKey(3000)
@@ -41,11 +42,7 @@ def next_frame(video_capture, params):
 
 
 while cv2.waitKey(1) < 0:
-    hasFrame, frame = next_frame(video_capture, params)
-
-    image = Image.fromarray(frame)
-    image = yolo.detect_image(image)
-    frame = np.asarray(image)
-
-    draw_utils.show_frame(frame, fps_calculator, preview_width)
-    write_output(frame, params)
+    hasFrame, input_frame = next_frame(video_capture, params)
+    output_frame = network.predict(input_frame)
+    draw_utils.show_frame(output_frame, fps_calculator, preview_width)
+    write_output(output_frame, params)

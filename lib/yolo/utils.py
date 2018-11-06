@@ -1,10 +1,10 @@
-"""Miscellaneous utility functions."""
-
 from functools import reduce
-
 from PIL import Image
+
 import numpy as np
 from matplotlib.colors import rgb_to_hsv, hsv_to_rgb
+import os
+
 
 def compose(*funcs):
     """Compose arbitrarily many functions, evaluated left to right.
@@ -16,6 +16,7 @@ def compose(*funcs):
         return reduce(lambda f, g: lambda *a, **kw: g(f(*a, **kw)), funcs)
     else:
         raise ValueError('Composition of empty sequence not supported.')
+
 
 def letterbox_image(image, size):
     '''resize image with unchanged aspect ratio using padding'''
@@ -30,8 +31,10 @@ def letterbox_image(image, size):
     new_image.paste(image, ((w-nw)//2, (h-nh)//2))
     return new_image
 
+
 def rand(a=0, b=1):
     return np.random.rand()*(b-a) + a
+
 
 def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jitter=.3, hue=.1, sat=1.5, val=1.5, proc_img=True):
     '''random preprocessing for real-time data augmentation'''
@@ -119,3 +122,19 @@ def get_random_data(annotation_line, input_shape, random=True, max_boxes=20, jit
         box_data[:len(box)] = box
 
     return image_data, box_data
+
+
+def get_class(classes_path):
+    classes_path = os.path.expanduser(classes_path)
+    with open(classes_path) as f:
+        class_names = f.readlines()
+    class_names = [c.strip() for c in class_names]
+    return class_names
+
+
+def get_anchors(path):
+    path = os.path.expanduser(path)
+    with open(path) as f:
+        anchors = f.readline()
+    anchors = [float(x) for x in anchors.split(',')]
+    return np.array(anchors).reshape(-1, 2)

@@ -11,7 +11,7 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.regularizers import l2
 
-from lib.yolo3.utils import compose
+from lib.yolo.utils import compose
 
 
 @wraps(Conv2D)
@@ -22,6 +22,7 @@ def DarknetConv2D(*args, **kwargs):
     darknet_conv_kwargs.update(kwargs)
     return Conv2D(*args, **darknet_conv_kwargs)
 
+
 def DarknetConv2D_BN_Leaky(*args, **kwargs):
     """Darknet Convolution2D followed by BatchNormalization and LeakyReLU."""
     no_bias_kwargs = {'use_bias': False}
@@ -30,6 +31,7 @@ def DarknetConv2D_BN_Leaky(*args, **kwargs):
         DarknetConv2D(*args, **no_bias_kwargs),
         BatchNormalization(),
         LeakyReLU(alpha=0.1))
+
 
 def resblock_body(x, num_filters, num_blocks):
     '''A series of resblocks starting with a downsampling Convolution2D'''
@@ -43,6 +45,7 @@ def resblock_body(x, num_filters, num_blocks):
         x = Add()([x,y])
     return x
 
+
 def darknet_body(x):
     '''Darknent body having 52 Convolution2D layers'''
     x = DarknetConv2D_BN_Leaky(32, (3,3))(x)
@@ -52,6 +55,7 @@ def darknet_body(x):
     x = resblock_body(x, 512, 8)
     x = resblock_body(x, 1024, 4)
     return x
+
 
 def make_last_layers(x, num_filters, out_filters):
     '''6 Conv2D_BN_Leaky layers followed by a Conv2D_linear layer'''
@@ -85,6 +89,7 @@ def yolo_body(inputs, num_anchors, num_classes):
     x, y3 = make_last_layers(x, 128, num_anchors*(num_classes+5))
 
     return Model(inputs, [y1,y2,y3])
+
 
 def tiny_yolo_body(inputs, num_anchors, num_classes):
     '''Create Tiny YOLO_v3 model CNN body in keras.'''
