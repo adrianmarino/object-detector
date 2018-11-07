@@ -5,6 +5,7 @@ Detect objects in images, videos and webcam streaming (Under construction)
 ## Requeriments
 
 * conda
+* 7z
 
 ## Setup
 
