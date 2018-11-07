@@ -6,6 +6,7 @@
 ## Requeriments
 
 * conda
+* 7z
 
 ## Setup
 
