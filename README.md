@@ -31,7 +31,7 @@ source activate object-detector
 **Step 4:** Run detector.
 
 ```bash
-python object-detector.py --input-video input.mp4 --output output.mp4 --predict-bounding-boxes
+python object-detector.py --input-video input.mp4 --output output.mp4 --predict-bounding-boxes --preview-width 500
 ```
 
 

@@ -10,7 +10,6 @@ import numpy as np
 import cv2
 import sys
 
-preview_width = 2400
 params = InputParamsResolver.resolve()
 
 video_capture = VideoCaptureFactory.create(params)
@@ -50,5 +49,5 @@ def process_frame(frame):
 while cv2.waitKey(1) < 0:
     hasFrame, input_frame = next_frame(video_capture, params)
     output_frame = process_frame(input_frame)
-    draw_utils.show_frame(output_frame, fps_calculator, preview_width)
+    draw_utils.show_frame(output_frame, fps_calculator, params['preview_width'])
     write_output(output_frame, params)

@@ -24,6 +24,7 @@ class InputParamsResolver:
         parser.add_argument('--input-video',            help='path of a video file.')
         parser.add_argument('--input-webcam',           help='get video from webcam.')
         parser.add_argument('--output',                 help='path of output file.')
+        parser.add_argument('--preview-width',          help='preview width.', type=int, default=1200)
         parser.add_argument('--predict-bounding-boxes', help='predict bounding boxes', action='store_true', default=False)
 
         params = {k: v for k, v in dict(parser.parse_args()._get_kwargs()).items() if v is not None }
@@ -34,7 +35,7 @@ class InputParamsResolver:
             InputParamsResolver._not_found_output_param()
 
         for name in params:
-            if name in ['output', 'predict_bounding_boxes', 'input_webcam']:
+            if name in ['output', 'predict_bounding_boxes', 'preview_width', 'input_webcam']:
                 continue
             if not os.path.isfile(params[name]):
                 InputParamsResolver._not_found_file_error(params[name])
