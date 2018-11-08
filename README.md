@@ -31,11 +31,16 @@ source activate object-detector
 **Step 4:** Run detector.
 
 ```bash
-python object-detector.py --input-video input.mp4 --output output.mp4 --predict-bounding-boxes --preview-width 500
+python object-detector.py --input-video input/video3.mp4 --output output/output3.mp4 --predict-bounding-boxes --show-preview
 ```
 
-**Step 5:** Press ESC to end process. When input is a video this end process before process all video.
+**Step 5:** Press ESC key to end process. When input is a video this end process before process all video.
 
+**Step 6:** To show all options.
+
+```bash
+python object-detector.py --help
+```
 
 ## Fix errors
 

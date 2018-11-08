@@ -22,11 +22,11 @@ class InputParamsResolver:
         )
         parser.add_argument('--input-image',            help='path of an image file.')
         parser.add_argument('--input-video',            help='path of a video file.')
-        parser.add_argument('--input-webcam',           help='get video from webcam.')
-        parser.add_argument('--output',                 help='path of output file.')
-        parser.add_argument('--show-preview',           help='show preview.', action='store_true', default=False)
-        parser.add_argument('--preview-width',          help='preview width.', type=int, default=1200)
-        parser.add_argument('--predict-bounding-boxes', help='predict bounding boxes', action='store_true', default=False)
+        parser.add_argument('--input-webcam',           help='get video streming from webcam.')
+        parser.add_argument('--output',                 help='path of an output file.')
+        parser.add_argument('--show-preview',           help='show a preview on a system window.', action='store_true', default=False)
+        parser.add_argument('--preview-width',          help='preview window width.', type=int, default=1200)
+        parser.add_argument('--predict-bounding-boxes', help='predict & plot bounding boxes', action='store_true', default=False)
 
         params = {k: v for k, v in dict(parser.parse_args()._get_kwargs()).items() if v is not None }
 
