@@ -2,7 +2,7 @@
 
 * Detect objects in images, videos and video streaming from a webcam.
 * A YOLO v3 predictor.
-* Product of a personal research and based on [keras-yolo3](https://github.com/qqwweee/keras-yolo3) , [YOLOv3](https://github.com/xiaochus/YOLOv3) github repos.
+* Product of a personal investigation to internalize myself in the matter and strongly based :) on [keras-yolo3](https://github.com/qqwweee/keras-yolo3) and [YOLOv3](https://github.com/xiaochus/YOLOv3).
 
 ## Requeriments
 
@@ -23,14 +23,15 @@ conda env create --file environment.yml
 7z x  model_data/yolo.h5.7z.001 -o./model_data 
 ```
 
-**Step 3:** Activate project environment.
+## Use
+
+Before all activate object-detector environment:
 
 ```bash
 source activate object-detector
 ```
 
-
-## Use
+Next you can:
 
 * Detect objects in an image.
 
