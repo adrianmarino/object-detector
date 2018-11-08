@@ -29,13 +29,23 @@ source activate object-detector
 7z x  model_data/yolo.h5.7z.001 -o./model_data 
 ```
 
-**Step 4:** Run detector.
+
+**Step 4:** Detect object in an image.
 
 ```bash
-python object-detector.py --input-video input/video3.mp4 --output output/output3.mp4 --predict-bounding-boxes --show-preview
+python object-detector.py --input-image input/image.jpg --output output/processed_image.jpg --predict-bounding-boxes
 ```
 
-**Step 5:** Press ESC key to end process. When input is a video this end process before process all video.
+**Step 5:** Run detector on a video.
+
+```bash
+python object-detector.py --input-video input/video.mp4 --output output/processed_video.mp4 --predict-bounding-boxes --show-preview
+```
+
+**Step 6:** Press ESC key to end process. When input is a video this end process before process all video.
+
+
+
 
 **Step 6:** To show all options.
 

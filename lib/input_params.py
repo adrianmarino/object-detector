@@ -22,7 +22,7 @@ class InputParamsResolver:
         )
         parser.add_argument('--input-image',            help='path of an image file.')
         parser.add_argument('--input-video',            help='path of a video file.')
-        parser.add_argument('--input-webcam',           help='get video streming from webcam.')
+        parser.add_argument('--input-webcam',           help='get video streming from webcam.', action='store_true', default=False)
         parser.add_argument('--output',                 help='path of an output file.')
         parser.add_argument('--show-preview',           help='show a preview on a system window.', action='store_true', default=False)
         parser.add_argument('--preview-width',          help='preview window width.', type=int, default=1200)

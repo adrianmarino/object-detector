@@ -41,6 +41,10 @@ def next_frame(video_capture, params):
     has_Frame, frame = video_capture.read()
     if not has_Frame:
         stop_processing(params)
+
+    if params['input_webcam']:
+        frame = cv2.flip(frame.copy(), 1)
+
     return has_Frame, frame
 
 
