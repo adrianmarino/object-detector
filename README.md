@@ -1,6 +1,6 @@
 #  object-detector
 
-* Detect objects in images, videos and webcam streaming.
+* Detect objects in images, videos and video streaming from a webcam.
 * A YOLO v3 predictor.
 * Product of a personal research and based on [keras-yolo3](https://github.com/qqwweee/keras-yolo3) , [YOLOv3](https://github.com/xiaochus/YOLOv3) github repos.
 
