@@ -1,13 +1,14 @@
 #  object-detector
 
 * Detect objects in images, videos and video streaming from a webcam.
-* A YOLO v3 predictor.
-* Product of a personal investigation to internalize myself in the matter and strongly based :) on [keras-yolo3](https://github.com/qqwweee/keras-yolo3) and [YOLOv3](https://github.com/xiaochus/YOLOv3).
+* A [YOLOv3](https://pjreddie.com/darknet/yolo/) predictor writen in python with keras.
+* Product of a personal investigation to internalize myself in the matter and strongly based :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
 
 ## Requeriments
 
 * conda
 * 7z
+* A respectable video card (i.e. GeForce GTX 1060 or higher)
 
 ## Setup
 
@@ -67,6 +68,11 @@ python object-detector.py --input-webcam \
 ```bash
 python object-detector.py --help
 ```
+
+### Pending issues
+
+* Only use open-cv to process images to increase processing fps.
+* Rewrite bounding boxes building and yolo model source code to improve my understanding of the process.
 
 ## Fix errors
 
