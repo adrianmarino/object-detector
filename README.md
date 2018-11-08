@@ -34,6 +34,8 @@ source activate object-detector
 python object-detector.py --input-video input.mp4 --output output.mp4 --predict-bounding-boxes --preview-width 500
 ```
 
+**Step 5:** Press ESC to end process. When input is a video this end process before process all video.
+
 
 ## Fix errors
 

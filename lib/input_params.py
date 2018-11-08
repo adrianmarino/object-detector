@@ -1,6 +1,6 @@
 import argparse
-import os
 import sys
+import os
 
 
 class InputParamsResolver:
@@ -24,6 +24,7 @@ class InputParamsResolver:
         parser.add_argument('--input-video',            help='path of a video file.')
         parser.add_argument('--input-webcam',           help='get video from webcam.')
         parser.add_argument('--output',                 help='path of output file.')
+        parser.add_argument('--show-preview',           help='show preview.', action='store_true', default=False)
         parser.add_argument('--preview-width',          help='preview width.', type=int, default=1200)
         parser.add_argument('--predict-bounding-boxes', help='predict bounding boxes', action='store_true', default=False)
 
@@ -35,7 +36,7 @@ class InputParamsResolver:
             InputParamsResolver._not_found_output_param()
 
         for name in params:
-            if name in ['output', 'predict_bounding_boxes', 'preview_width', 'input_webcam']:
+            if name in ['output', 'predict_bounding_boxes', 'preview_width', 'input_webcam', 'show_preview']:
                 continue
             if not os.path.isfile(params[name]):
                 InputParamsResolver._not_found_file_error(params[name])

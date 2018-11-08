@@ -1,4 +1,5 @@
-from lib.input import InputParamsResolver 
+from lib.input_params import InputParamsResolver
+from lib.keyboard import Keyboard
 from lib.video import VideoCaptureFactory
 from lib.video import VideoWriterFactory
 from lib.fps_calculator import FpsCalculator
@@ -11,6 +12,7 @@ import cv2
 import sys
 
 params = InputParamsResolver.resolve()
+keyboard = Keyboard()
 
 video_capture = VideoCaptureFactory.create(params)
 video_writer = VideoWriterFactory.create(video_capture, params)
@@ -36,18 +38,29 @@ def stop_processing(params):
 
 
 def next_frame(video_capture, params):
-    hasFrame, frame = video_capture.read() 
-    if not hasFrame:
+    has_Frame, frame = video_capture.read()
+    if not has_Frame:
         stop_processing(params)
-    return hasFrame, frame
+    return has_Frame, frame
 
 
 def process_frame(frame):
     return object_detector.predict_bounding_boxes(frame) if params['predict_bounding_boxes'] else frame
 
 
-while cv2.waitKey(1) < 0:
+def show_data(frame, params):
+    if params['show_preview']:
+        draw_utils.show_frame(frame, fps_calculator, params['preview_width'])
+    else:
+        print("...processing", fps_calculator.next())
+
+
+while not keyboard.is_key_press(Keyboard.ESC()):
     hasFrame, input_frame = next_frame(video_capture, params)
     output_frame = process_frame(input_frame)
-    draw_utils.show_frame(output_frame, fps_calculator, params['preview_width'])
+    show_data(output_frame, params)
     write_output(output_frame, params)
+
+object_detector.close()
+video_capture.release()
+video_writer.release()

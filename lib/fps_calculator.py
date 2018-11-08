@@ -5,7 +5,7 @@ class FpsCalculator:
     def __init__(self):
         self.accum_time = 0
         self.curr_fps = 0
-        self.fps = "FPS: ??"
+        self.fps = "?? fps"
         self.prev_time = timer()
 
     def next(self):
@@ -16,6 +16,6 @@ class FpsCalculator:
         self.curr_fps = self.curr_fps + 1
         if self.accum_time > 1:
             self.accum_time = self.accum_time - 1
-            self.fps = "FPS: " + str(self.curr_fps)
+            self.fps = f'{str(self.curr_fps)} fps'
             self.curr_fps = 0
         return self.fps

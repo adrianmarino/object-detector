@@ -14,7 +14,7 @@ def resize(frame, width = 100.0):
 def write_fps(frame, value):
     cv2.putText(
         frame, 
-        text=value, 
+        text=value,
         org=(10, 45), 
         fontFace=cv2.FONT_HERSHEY_DUPLEX,
         fontScale=1.8, 
