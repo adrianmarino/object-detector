@@ -17,16 +17,17 @@ def write_fps(frame, value):
         text=value,
         org=(10, 45), 
         fontFace=cv2.FONT_HERSHEY_DUPLEX,
-        fontScale=1.8, 
+        fontScale=1.2,
         color=(255, 255, 255),
         thickness=2
     )
 
 
 def show_frame(frame, fps_calculator, preview_width):
-    write_fps(frame, fps_calculator.next())
+    frame_copy = frame.copy()
+    write_fps(frame_copy, fps_calculator.next())
     cv2.namedWindow('frame', cv2.WINDOW_AUTOSIZE)
-    cv2.imshow('frame', resize(frame, width=preview_width))
+    cv2.imshow('frame', resize(frame_copy, width=preview_width))
 
 
 def letterbox_image(image, size):

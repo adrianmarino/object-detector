@@ -54,6 +54,7 @@ python object-detector.py --input-video input/video.mp4 \
 ```bash
 python object-detector.py --input-webcam \
     --output output/processed_video.mp4 \
+    --output-fps 10 \
     --predict-bounding-boxes \
     --show-preview
 ```
