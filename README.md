@@ -17,37 +17,50 @@
 conda env create --file environment.yml
 ```
 
-**Step 2:** Activate project environment.
-
-```bash
-source activate object-detector
-```
-
-**Step 3:** Extract network weights.
+**Step 2:** Extract network weights.
 
 ```bash
 7z x  model_data/yolo.h5.7z.001 -o./model_data 
 ```
 
-
-**Step 4:** Detect object in an image.
-
-```bash
-python object-detector.py --input-image input/image.jpg --output output/processed_image.jpg --predict-bounding-boxes
-```
-
-**Step 5:** Run detector on a video.
+**Step 3:** Activate project environment.
 
 ```bash
-python object-detector.py --input-video input/video.mp4 --output output/processed_video.mp4 --predict-bounding-boxes --show-preview
+source activate object-detector
 ```
 
-**Step 6:** Press ESC key to end process. When input is a video this end process before process all video.
 
+## Use
 
+* Detect objects in an image.
 
+```bash
+python object-detector.py --input-image input/image.jpg \
+    --output output/processed_image.jpg \
+    --predict-bounding-boxes
+```
 
-**Step 6:** To show all options.
+* Detect objects on video.
+
+```bash
+python object-detector.py --input-video input/video.mp4 \
+    --output output/processed_video.mp4 \
+    --predict-bounding-boxes \
+    --show-preview
+```
+
+* Detect objects from webcam video streaming.
+
+```bash
+python object-detector.py --input-webcam \
+    --output output/processed_video.mp4 \
+    --predict-bounding-boxes \
+    --show-preview
+```
+
+* Press **ESC** key to end process. When input is a video this end process before process all video.
+
+* To view all options.
 
 ```bash
 python object-detector.py --help
