@@ -5,8 +5,8 @@ import os
 def intersection(lst1, lst2): return list(set(lst1) & set(lst2))
 
 
-class NotFountFileError:
-    def __init__(self, name, path): self.message = f'Error: Not found {path} {name} file!'
+class NotFountFileError(Exception):
+    def __init__(self, name, path): super(NotFountFileError, self).__init__(f'Error: Not found {path} {name} file!')
 
 
 class InputParamsResolver:
@@ -69,7 +69,7 @@ class InputParamsResolver:
         return {name: value for name, value in self.params.items() if name in ['input_image', 'input_video']}
 
     def resolve(self):
-        for name, path in self.path_params:
+        for name, path in self.path_params.items():
             if not os.path.isfile(path):
                 raise NotFountFileError(name, path)
         return self.params
