@@ -11,7 +11,7 @@ import numpy as np
 import cv2
 import sys
 
-params = InputParamsResolver.resolve()
+params = InputParamsResolver().resolve()
 keyboard = Keyboard()
 
 video_capture = VideoCaptureFactory.create(params)

@@ -1,21 +1,17 @@
 import argparse
-import sys
 import os
+
+
+def intersection(lst1, lst2): return list(set(lst1) & set(lst2))
+
+
+class NotFountFileError:
+    def __init__(self, name, path): self.message = f'Error: Not found {path} {name} file!'
 
 
 class InputParamsResolver:
 
-    @staticmethod
-    def _not_found_file_error(path): print(f'Error: Not found {path} file!')
-
-    @staticmethod
-    def _not_found_input_param(): print(f'Error: Not found input!')
-
-    @staticmethod
-    def _not_found_output_param(): print(f'Error: Not found output!')
-
-    @staticmethod
-    def resolve():
+    def __init__(self):
         parser = argparse.ArgumentParser(
             prog="object-detector",
             description='YOLO Image object detector :)'
@@ -62,22 +58,20 @@ class InputParamsResolver:
             action='store_true',
             default=False
         )
+        self.parser = parser
 
-        params = {k: v for k, v in dict(parser.parse_args()._get_kwargs()).items() if v is not None }
+    @property
+    def params(self):
+        return {k: v for k, v in dict(self.parser.parse_args()._get_kwargs()).items() if v is not None }
 
-        if not params:
-            InputParamsResolver._not_found_input_param()
-        if 'output' in params:
-            InputParamsResolver._not_found_output_param()
+    @property
+    def path_params(self):
+        return {name: value for name, value in self.params.items() if name in ['input_image', 'input_video']}
 
-        exclude_params = [
-            'output', 'predict_bounding_boxes', 'preview_width', 'input_webcam', 'show_preview', 'output_fps'
-        ]
-        for name in params:
-            if name in exclude_params:
-                continue
-            if not os.path.isfile(params[name]):
-                InputParamsResolver._not_found_file_error(params[name])
-                sys.exit(1)
+    def resolve(self):
+        for name, path in self.path_params:
+            if not os.path.isfile(path):
+                raise NotFountFileError(name, path)
+        return self.params
 
-        return params
+
