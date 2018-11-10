@@ -24,9 +24,7 @@ conda env create --file environment.yml
 7z x  model_data/yolo.h5.7z.001 -o./model_data 
 ```
 
-## Use
-
-Before all activate object-detector environment every time you use it with this:
+**Step 3:** Before all you need activate object-detector environment every time you use it with this:
 
 ```bash
 source activate object-detector
@@ -61,29 +59,32 @@ source activate object-detector
 python object-detector.py params
 ```
 
-Next you can:
+## Use
 
-* Detect objects in an image.
+* Detect objects in an image:
 
 ```bash
-object-detector --input-image input/image.jpg \
+object-detector \
+    --input-image input/image.jpg \
     --output output/processed_image.jpg \
     --predict-bounding-boxes
 ```
 
-* Detect objects on video.
+* Detect objects on video:
 
 ```bash
-object-detector --input-video input/video.mp4 \
+object-detector \
+    --input-video input/video.mp4 \
     --output output/processed_video.mp4 \
     --predict-bounding-boxes \
     --show-preview
 ```
 
-* Detect objects from webcam video streaming.
+* Detect objects in a video streaming from webcam:
 
 ```bash
-object-detector --input-webcam \
+object-detector \
+    --input-webcam \
     --output output/processed_video.mp4 \
     --output-fps 10 \
     --predict-bounding-boxes \
@@ -92,7 +93,7 @@ object-detector --input-webcam \
 
 * Press **ESC** key to end process. When input is a video this end process before process all video.
 
-* To view all options.
+* To view all options:
 
 ```bash
 object-detector --help

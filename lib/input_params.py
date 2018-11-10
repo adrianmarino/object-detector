@@ -50,7 +50,7 @@ class InputParamsResolver:
             '--preview-width',
             help='preview window width.',
             type=int,
-            default=1200
+            default=1500
         )
         parser.add_argument(
             '--predict-bounding-boxes',

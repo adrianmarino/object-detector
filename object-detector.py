@@ -50,29 +50,27 @@ def get_to_processing_params():
     return params['input_webcam'], params['preview_width'], params['show_preview'], params['predict_bounding_boxes']
 
 
-# -----------------------------------------------------------------------------
-# Program
-# -----------------------------------------------------------------------------
-hide_tensorflow_logs()
-params = InputParamsResolver().resolve()
-keyboard = Keyboard()
-fps_calculator = FpsCalculator()
-reader, writer = create_input_output()
-object_detector = ObjectDetectorFactory.create(Settings())
+if __name__ == '__main__':
+    hide_tensorflow_logs()
+    params = InputParamsResolver().resolve()
+    keyboard = Keyboard()
+    fps_calculator = FpsCalculator()
+    reader, writer = create_input_output()
+    object_detector = ObjectDetectorFactory.create(Settings())
 
-flip, preview_width, show_preview, predict_bounding_boxes = get_to_processing_params()
+    flip, preview_width, show_preview, predict_bounding_boxes = get_to_processing_params()
 
-while not keyboard.is_key_press(Keyboard.ESC()):
-    has_frame, input_frame = reader.next(flip=flip)
-    if not has_frame:
-        break
+    while not keyboard.is_key_press(Keyboard.ESC()):
+        has_frame, input_frame = reader.next(flip=flip)
+        if not has_frame:
+            break
 
-    output_frame = process_frame(object_detector, input_frame, predict_bounding_boxes)
-    show_data(output_frame, show_preview, preview_width)
-    write_output(writer, output_frame, params)
+        output_frame = process_frame(object_detector, input_frame, predict_bounding_boxes)
+        show_data(output_frame, show_preview, preview_width)
+        write_output(writer, output_frame, params)
 
-print('> Processing finished!')
-cv2.destroyAllWindows()
-object_detector.close()
-reader.close()
-writer.close()
+    print('> Processing finished!')
+    cv2.destroyAllWindows()
+    object_detector.close()
+    reader.close()
+    writer.close()
