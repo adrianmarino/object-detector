@@ -4,6 +4,9 @@
 * A [YOLOv3](https://pjreddie.com/darknet/yolo/) predictor writen in python with keras.
 * Product of a personal investigation to internalize myself in the matter and strongly based :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
 
+
+![alt Output sample](https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/sample.png)
+
 ## Requeriments
 
 * conda
