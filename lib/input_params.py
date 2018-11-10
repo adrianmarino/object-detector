@@ -14,7 +14,7 @@ class InputParamsResolver:
     def __init__(self):
         parser = argparse.ArgumentParser(
             prog="object-detector",
-            description='YOLO Image object detector :)'
+            description='YOLO object detector :)'
         )
         parser.add_argument(
             '--input-image',
