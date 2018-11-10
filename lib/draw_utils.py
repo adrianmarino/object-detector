@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from PIL import ImageDraw, Image
+from PIL import ImageDraw, Image, ImageFont
 
 
 def resize(frame, width = 100.0):
@@ -99,3 +99,10 @@ def get_boxed_image(image, image_size):
         )
         boxed_image = letterbox_image(image, new_image_size)
     return boxed_image
+
+
+def load_font(image, font_path):
+    return ImageFont.truetype(
+        font=font_path,
+        size=np.floor(2e-2 * image.size[1] + 0.5).astype('int32')
+    )

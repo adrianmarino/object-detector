@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from keras import backend as K
-from PIL import ImageFont, Image
-from lib.draw_utils import get_boxed_image, draw_bounding_box
+from PIL import Image
+from lib.draw_utils import get_boxed_image, draw_bounding_box, load_font
 
 
 class ObjectDetector(object):
@@ -16,7 +16,8 @@ class ObjectDetector(object):
             input_image_shape,
             model,
             colors,
-            model_image_size
+            model_image_size,
+            font_path
     ):
         self.class_names = class_names
         self.anchors = anchors
@@ -28,6 +29,7 @@ class ObjectDetector(object):
         self.colors = colors
         self.model_image_size = model_image_size
         self.sess = K.get_session()
+        self.font_path = font_path
 
     def predict_bounding_boxes(self, image):
         image = Image.fromarray(image)
@@ -36,7 +38,7 @@ class ObjectDetector(object):
         return np.asarray(image)
 
     def draw_bounding_boxes(self, image, out_boxes, out_classes, out_scores):
-        font = self._create_font(image)
+        font = load_font(image, self.font_path)
         thickness = (image.size[0] + image.size[1]) // 800
         for index, clazz in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[clazz]
@@ -60,12 +62,5 @@ class ObjectDetector(object):
                 K.learning_phase(): 0
             })
         return out_boxes, out_classes, out_scores
-
-    @staticmethod
-    def _create_font(image):
-        return ImageFont.truetype(
-            font='model_data/font/FiraMono-Medium.otf',
-            size=np.floor(2e-2 * image.size[1] + 0.5).astype('int32')
-        )
 
     def close(self): self.sess.close()

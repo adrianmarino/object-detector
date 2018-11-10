@@ -41,7 +41,8 @@ class ObjectDetectorFactory:
             input_image_shape,
             model,
             colors,
-            settings.model_image_size
+            settings.model_image_size,
+            settings.font_path
         )
 
     @staticmethod

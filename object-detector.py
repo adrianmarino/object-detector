@@ -11,13 +11,18 @@ import cv2
 import os
 
 
-def create_video_reader(params):
+def create_reader(params):
     if 'input_image' in params:
         return VideoReader(params['input_image'])
     elif 'input_video' in params:
         return VideoReader(params['input_video'])
     elif 'input_webcam' in params:
         return VideoReader()
+
+
+def create_input_output():
+    reader = create_reader(params)
+    return reader, VideoWriter(params['output'], params['output_fps'], reader.size())
 
 
 def write_output(video_writer, frame, params):
@@ -38,44 +43,36 @@ def show_data(frame, show_preview, preview_width):
         print("> Processing at", fps_calculator.next())
 
 
+def hide_tensorflow_logs(): os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+
+def get_to_processing_params():
+    return params['input_webcam'], params['preview_width'], params['show_preview'], params['predict_bounding_boxes']
+
+
 # -----------------------------------------------------------------------------
 # Program
 # -----------------------------------------------------------------------------
-try:
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+hide_tensorflow_logs()
+params = InputParamsResolver().resolve()
+keyboard = Keyboard()
+fps_calculator = FpsCalculator()
+reader, writer = create_input_output()
+object_detector = ObjectDetectorFactory.create(Settings())
 
-    params = InputParamsResolver().resolve()
-    flip = params['input_webcam']
-    preview_width = params['preview_width']
-    show_preview = params['show_preview']
-    predict_bounding_boxes = params['predict_bounding_boxes']
+flip, preview_width, show_preview, predict_bounding_boxes = get_to_processing_params()
 
-    keyboard = Keyboard()
-    fps_calculator = FpsCalculator()
+while not keyboard.is_key_press(Keyboard.ESC()):
+    has_frame, input_frame = reader.next(flip=flip)
+    if not has_frame:
+        break
 
-    video_reader = create_video_reader(params)
-    video_writer = VideoWriter(
-        path=params['output'],
-        size=video_reader.size(),
-        fps=params['output_fps']
-    )
-    object_detector = ObjectDetectorFactory.create(Settings())
+    output_frame = process_frame(object_detector, input_frame, predict_bounding_boxes)
+    show_data(output_frame, show_preview, preview_width)
+    write_output(writer, output_frame, params)
 
-    while not keyboard.is_key_press(Keyboard.ESC()):
-        has_frame, input_frame = video_reader.next(flip=flip)
-        if not has_frame:
-            break
-
-        output_frame = process_frame(object_detector, input_frame, predict_bounding_boxes)
-        show_data(output_frame, show_preview, preview_width)
-        write_output(video_writer, output_frame, params)
-    print('> Processing finished!')
-
-except Exception as error:
-    print(f'> Error when process input!. {error}')
-
-finally:
-    cv2.destroyAllWindows()
-    object_detector.close()
-    video_reader.close()
-    video_writer.close()
+print('> Processing finished!')
+cv2.destroyAllWindows()
+object_detector.close()
+reader.close()
+writer.close()
