@@ -116,3 +116,5 @@ object-detector --help
 pip install --upgrade pip
 pip install opencv-contrib-python
 ```
+
+#### macOS: Webcam input only works under classic terminal but not in another like iterm.
