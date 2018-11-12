@@ -10,9 +10,10 @@
 
 ### Pending issues
 
-* Python notebook to make transfer learning and predict another classes.
-* Only use open-cv to process images to increase processing fps.
-* Rewrite bounding boxes building and yolo model source code to improve my understanding of the process.
+* Python notebook to make transfer learning to predict another classes.
+* Only use open-cv to process images to increase fps.
+* Rewrite bounding boxes building
+* Rewrite yolo model to improve my understanding of process.
 
 ## Requeriments
 
