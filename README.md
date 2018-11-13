@@ -2,16 +2,18 @@
 
 * Detect objects in images, videos and video streaming from a webcam.
 * A [YOLOv3](https://pjreddie.com/darknet/yolo/) predictor writen in python with keras.
-* Product of a personal investigation to internalize myself in the matter and strongly based :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
+* Product of a personal investigation to internalize myself in the matter.
+* **Strongly based** :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
 
 **Sample Video**
 [![Sample Video](https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/sample.png)](http://www.youtube.com/watch?v=GIXVGANX9WM "Sample Video")
 
 ### Pending issues
 
-* Python notebook to make transfer learning and predict another classes.
-* Only use open-cv to process images to increase processing fps.
-* Rewrite bounding boxes building and yolo model source code to improve my understanding of the process.
+* Python notebook to make transfer learning to predict another classes.
+* Only use open-cv to process images to increase fps.
+* Rewrite bounding boxes building
+* Rewrite yolo model to improve my understanding of process.
 
 ## Requeriments
 
@@ -116,3 +118,5 @@ object-detector --help
 pip install --upgrade pip
 pip install opencv-contrib-python
 ```
+
+#### macOS: Webcam input only works under classic terminal but not in another like iterm.
