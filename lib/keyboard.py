@@ -11,7 +11,7 @@ class Keyboard:
         self.input = KBHit()
 
     def is_key_press(self, key_code):
-        if cv2.waitKey(key_code) > 0:
+        if cv2.waitKey(1) > 0:
             return True
 
         if self.input.kbhit():
