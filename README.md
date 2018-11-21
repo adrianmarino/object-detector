@@ -17,7 +17,7 @@
 
 ## Requeriments
 
-* anaconda/conda
+* [anaconda](https://www.anaconda.com/download/#linux)
 * 7z
 * A respectable video card (i.e. GeForce GTX 1060 or higher)
 
