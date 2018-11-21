@@ -17,7 +17,7 @@
 
 ## Requeriments
 
-* conda
+* anaconda/conda
 * 7z
 * A respectable video card (i.e. GeForce GTX 1060 or higher)
 
