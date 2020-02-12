@@ -8,9 +8,9 @@
 **Sample Video**
 
 <p align="center">
-    <link href="https://youtu.be/watch?v=GIXVGANX9WM">
+    <a href="https://www.youtube.com/watch?v=GIXVGANX9WM" rel="noopener noreferrer" target="_blank">
         <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/video.png" alt="Sample Video" width="800">
-    </link>
+    </a>
 </p>
 
 **Webcam Screenshot**
@@ -22,9 +22,7 @@
 **Sample Image**
 
 <p align="center">
-    <link href="https://youtu.be/watch?v=GIXVGANX9WM">
-        <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/processed_image.jpg" alt="Sample Image" width="800">
-    </link>
+    <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/processed_image.jpg" alt="Sample Image" width="800">
 </p>
 
 ## Requeriments
@@ -55,19 +53,21 @@ source activate object-detector
 
 or forget use it creating a bash/zsh alias:
 
-**bash**:
-```bash
-echo -e "export PATH=.:\$PATH" >> ~/.bashrc
-echo "alias object-detector='source activate object-detector;python object-detector.py'" >> ~/.bashrc
-source ~/.bashrc
-```
+* **bash**
 
-**zsh**:
-```bash
-echo -e "export PATH=.:\$PATH" >> ~/.zshrc
-echo "alias object-detector='source activate object-detector;python object-detector.py'" >> ~/.zshrc
-source ~/.zshrc
-```
+    ```bash
+    echo -e "export PATH=.:\$PATH:$PATH" >> ~/.bashrc
+    echo "alias object-detector='source activate object-detector;python object-detector.py'" >> ~/.bashrc
+    source ~/.bashrc
+    ```
+
+* **zsh**
+
+    ```bash
+    echo -e "export PATH=.:\$PATH:$PATH" >> ~/.zshrc
+    echo "alias object-detector='source activate object-detector;python object-detector.py'" >> ~/.zshrc
+    source ~/.zshrc
+    ```
 
 with this you can use object detector as a regular command in the following way:
 
@@ -86,88 +86,88 @@ python object-detector.py params
 
 * Detect objects in an image:
 
-```bash
-object-detector \
-    --input-image input/image.jpg \
-    --output output/processed_image.jpg \
-    --predict-bounding-boxes
-```
+    ```bash
+    object-detector \s
+        --input-image input/image.jpg \
+        --output output/processed_image.jpg \
+        --predict-bounding-boxes
+    ```
 
 * Detect objects on video:
 
-```bash
-object-detector \
-    --input-video input/video.mp4 \
-    --output output/processed_video.mp4 \
-    --predict-bounding-boxes \
-    --show-preview
-```
+    ```bash
+    object-detector \
+        --input-video input/video.mp4 \
+        --output output/processed_video.mp4 \
+        --predict-bounding-boxes \
+        --show-preview
+    ```
 
 * Detect objects in a video streaming from webcam:
 
-```bash
-object-detector \
-    --input-webcam 0 \
-    --output output/processed_video.mp4 \
-    --output-fps 10 \
-    --predict-bounding-boxes \
-    --show-preview
-```
+    ```bash
+    object-detector \
+        --input-webcam 0 \
+        --output output/processed_video.mp4 \
+        --output-fps 10 \
+        --predict-bounding-boxes \
+        --show-preview
+    ```
 
-**Note**: `--input-webcam`: `0` is the integrated laptop webcam video port number, but also you can use another ports for external webcams or external video input devices. Values: From 0 to N.
+    **Note**: `--input-webcam`: `0` is the integrated laptop webcam video port number, but also you can use another ports for external webcams or external video input devices. Values: From 0 to N.
 
 * Press **ESC** key to end process. When input is a video this end process before process all video.
 
 * To view all options:
 
-```bash
-object-detector --help
-
-$ object-detector --help
-usage: object-detector [-h] [--input-image INPUT_IMAGE]
-                       [--input-video INPUT_VIDEO] [--output OUTPUT]
-                       [--input-webcam INPUT_WEBCAM] [--output-fps OUTPUT_FPS]
-                       [--show-preview] [--preview-width PREVIEW_WIDTH]
-                       [--predict-bounding-boxes]
-
-YOLO object detector :)
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --input-image INPUT_IMAGE
-                        Path of an image file.
-  --input-video INPUT_VIDEO
-                        Path of a video file.
-  --output OUTPUT       Path of an output file.
-  --input-webcam INPUT_WEBCAM
-                        Input video device port. Available: 0, 2
-                        (/dev/videoX).
-  --output-fps OUTPUT_FPS
-                        Output video FPS. Ofter use with webcam input videos
-  --show-preview        Show preview window.
-  --preview-width PREVIEW_WIDTH
-                        Preview window width.
-  --predict-bounding-boxes
-                        Predict & plot bounding boxes
-```
-
-**Note**:You can see that `--input-webcam` description shows video ports of currently active devices. In this case:
-* `0`: Integrated laptop webcam.
-* `2`: External USB webcam.
+    ```bash
+    object-detector --help
+    
+    $ object-detector --help
+    usage: object-detector [-h] [--input-image INPUT_IMAGE]
+                           [--input-video INPUT_VIDEO] [--output OUTPUT]
+                           [--input-webcam INPUT_WEBCAM] [--output-fps OUTPUT_FPS]
+                           [--show-preview] [--preview-width PREVIEW_WIDTH]
+                           [--predict-bounding-boxes]
+    
+    YOLO object detector :)
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --input-image INPUT_IMAGE
+                            Path of an image file.
+      --input-video INPUT_VIDEO
+                            Path of a video file.
+      --output OUTPUT       Path of an output file.
+      --input-webcam INPUT_WEBCAM
+                            Input video device port. Available: 0, 2
+                            (/dev/videoX).
+      --output-fps OUTPUT_FPS
+                            Output video FPS. Ofter use with webcam input videos
+      --show-preview        Show preview window.
+      --preview-width PREVIEW_WIDTH
+                            Preview window width.
+      --predict-bounding-boxes
+                            Predict & plot bounding boxes
+    ```
+    
+    **Note**:You can see that `--input-webcam` description shows video ports of currently active devices. In this case:
+    * `0`: Integrated laptop webcam.
+    * `2`: External USB webcam.
 
 ## Known issues
 
-#### ...window.cpp:698: error: (-2:Unspecified error) The function is not implemented. 
+* **...window.cpp:698: error: (-2:Unspecified error) The function is not implemented.** 
 
-```bash
-pip install --upgrade pip
-pip install opencv-contrib-python
-```
+    ```bash
+    pip install --upgrade pip
+    pip install opencv-contrib-python
+    ```
 
-#### macOS: Webcam input only works under classic terminal but not in another like iterm.
+* **macOS**: Webcam input only works under classic terminal but not in another like iterm.
 
-## Pending tasks
+## Future tasks
 
 * Python notebook to make transfer learning to predict another classes.
-* Use nvenc (nvidia gup video coder/decoder) to increase video frame rate.
-* Rewrite yolo model to improve my understanding of process.
+* Use Nvidia NVENC encoder/decoder (Process video using GPU cuda cores) to increase video frame rate.
+* Rewrite yolo model to improve my understanding of the model.
