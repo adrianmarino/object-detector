@@ -11,7 +11,7 @@
 
 **Webcam Screenshot**
 
-<img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png" alt="Webcam Screenshot" width="60">
+<img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png" alt="Webcam Screenshot" width="600">
 
 ### Pending tasks
 
