@@ -9,6 +9,11 @@
 
 [![Sample Video](https://img.youtube.com/vi/GIXVGANX9WM/0.jpg)](http://www.youtube.com/watch?v=GIXVGANX9WM)
 
+**Webcam Screenshot**
+
+![Webcam Screenshot](https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png)
+
+
 ### Pending issues
 
 * Python notebook to make transfer learning to predict another classes.
