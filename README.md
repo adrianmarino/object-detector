@@ -33,8 +33,8 @@
 
 * [anaconda](https://www.anaconda.com/download/#linux)
 * 7z
-* A respectable video card (i.e. GeForce GTX 1060 or higher)
-* Tested on linux
+* A respectable video card. i.e. GeForce GTX 1060 or higher (Recommended).
+* A respectable webcam. i.e Logitech c922 (Recommended).
 
 ## Setup
 
