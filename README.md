@@ -6,7 +6,8 @@
 * **Strongly based** :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
 
 **Sample Video**
-[![Sample Video](https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/sample.png)](http://www.youtube.com/watch?v=GIXVGANX9WM "Sample Video")
+
+[![Sample Video](https://img.youtube.com/vi/GIXVGANX9WM/0.jpg)](http://www.youtube.com/watch?v=GIXVGANX9WM)
 
 ### Pending issues
 
