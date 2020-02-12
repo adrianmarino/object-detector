@@ -7,17 +7,25 @@
 
 **Sample Video**
 
-[![Sample Video](https://img.youtube.com/vi/GIXVGANX9WM/0.jpg)](http://www.youtube.com/watch?v=GIXVGANX9WM)
+<p align="center">
+    <link href="https://youtu.be/watch?v=GIXVGANX9WM">
+        <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/video.png" alt="Sample Video" width="800">
+    </link>
+</p>
 
 **Webcam Screenshot**
 
-<img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png" alt="Webcam Screenshot" width="600">
+<p align="center">
+    <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png" alt="Webcam Screenshot" width="817">
+</p>
 
-### Pending tasks
+**Sample Image**
 
-* Python notebook to make transfer learning to predict another classes.
-* Use nvenc (nvidia gup video coder/decoder) to increase video frame rate.
-* Rewrite yolo model to improve my understanding of process.
+<p align="center">
+    <link href="https://youtu.be/watch?v=GIXVGANX9WM">
+        <img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/output/processed_image.jpg" alt="Sample Image" width="800">
+    </link>
+</p>
 
 ## Requeriments
 
@@ -157,3 +165,9 @@ pip install opencv-contrib-python
 ```
 
 #### macOS: Webcam input only works under classic terminal but not in another like iterm.
+
+## Pending tasks
+
+* Python notebook to make transfer learning to predict another classes.
+* Use nvenc (nvidia gup video coder/decoder) to increase video frame rate.
+* Rewrite yolo model to improve my understanding of process.
