@@ -95,12 +95,14 @@ object-detector \
 
 ```bash
 object-detector \
-    --input-webcam \
+    --input-webcam 0 \
     --output output/processed_video.mp4 \
     --output-fps 10 \
     --predict-bounding-boxes \
     --show-preview
 ```
+
+Note: `--input-webcam 0` is the laptop integrated webcam port but can use another port like: 1, 2, 3...N.
 
 * Press **ESC** key to end process. When input is a video this end process before process all video.
 

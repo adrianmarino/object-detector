@@ -1,14 +1,15 @@
-from lib.input_params import InputParamsResolver
-from lib.keyboard import Keyboard
-from lib.video import VideoReader, VideoWriter
-from lib.fps_calculator import FpsCalculator
-from lib.object_detector.object_detector_factory import ObjectDetectorFactory
-from lib.object_detector.settings import Settings
+import os
+
+import cv2
+import numpy as np
 
 import lib.draw_utils as draw_utils
-import numpy as np
-import cv2
-import os
+from lib.fps_calculator import FpsCalculator
+from lib.input_params import InputParamsResolver
+from lib.keyboard import Keyboard
+from lib.object_detector.object_detector_factory import ObjectDetectorFactory
+from lib.object_detector.settings import Settings
+from lib.video import VideoReader, VideoWriter
 
 
 def create_reader(params):
@@ -17,7 +18,7 @@ def create_reader(params):
     elif 'input_video' in params:
         return VideoReader(params['input_video'])
     elif 'input_webcam' in params:
-        return VideoReader()
+        return VideoReader(params['input_webcam'])
 
 
 def create_input_output():

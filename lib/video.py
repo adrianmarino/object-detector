@@ -1,21 +1,51 @@
+import glob
+
 import cv2
 import numpy as np
 
 
+def available_video_ports():
+    ports = [filename.split('video')[1] for filename in glob.glob('/dev/video*')]
+    ports.sort()
+    available_ports = []
+
+    for port in ports:
+        try:
+            video_capture = cv2.VideoCapture(int(port))
+            if video_capture.read()[0]:
+                available_ports.append(port)
+            video_capture.release()
+        except:
+            continue
+
+    return available_ports
+
+
+def assert_video_port_availability(video_port):
+    available_ports = available_video_ports()
+    assert str(video_port) in available_ports, f"Video port {video_port} is not available!. Use any of these: {' or '.join(available_ports)}."
+
+
 class VideoReader:
-    def __init__(self, input=0): self.reader = cv2.VideoCapture(input)
+    def __init__(self, video_port=0):
+        assert_video_port_availability(video_port)
+        self.reader = cv2.VideoCapture(video_port)
 
     def next(self, flip=False):
         has_frame, frame = self.reader.read()
         return has_frame, cv2.flip(frame.copy(), 1) if flip else frame
 
-    def size(self): return round(self.width()), round(self.height())
+    def size(self):
+        return round(self.width()), round(self.height())
 
-    def width(self): return self.reader.get(cv2.CAP_PROP_FRAME_WIDTH)
+    def width(self):
+        return self.reader.get(cv2.CAP_PROP_FRAME_WIDTH)
 
-    def height(self): return self.reader.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    def height(self):
+        return self.reader.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
-    def close(self): self.reader.release()
+    def close(self):
+        self.reader.release()
 
 
 class VideoWriter:

@@ -26,9 +26,8 @@ class InputParamsResolver:
         )
         parser.add_argument(
             '--input-webcam',
-            help='get video streming from webcam.',
-            action='store_true',
-            default=False
+            help='get video streaming from camera port (Between 0 and N).',
+            type=int
         )
         parser.add_argument(
             '--output',
@@ -62,7 +61,7 @@ class InputParamsResolver:
 
     @property
     def params(self):
-        return {k: v for k, v in dict(self.parser.parse_args()._get_kwargs()).items() if v is not None }
+        return {k: v for k, v in dict(self.parser.parse_args()._get_kwargs()).items() if v is not None}
 
     @property
     def path_params(self):
@@ -73,5 +72,3 @@ class InputParamsResolver:
             if not os.path.isfile(path):
                 raise NotFountFileError(name, path)
         return self.params
-
-
