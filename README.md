@@ -1,7 +1,11 @@
 #  object-detector
 
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+
+##  Introduction
+
 * Detect objects in images, videos and video streaming from a webcam.
-* A [YOLOv3](https://pjreddie.com/darknet/yolo/) predictor writen in python with keras.
+* A [YOLOv3](https://pjredqdie.com/darknet/yolo/) predictor writen in python with keras.
 * Product of a personal investigation to internalize myself in the matter.
 * **Strongly based** :) on [YOLOv3](https://github.com/xiaochus/YOLOv3) and [keras-yolo3](https://github.com/qqwweee/keras-yolo3).
 
@@ -168,6 +172,6 @@ python object-detector.py params
 
 ## Future tasks
 
-* Python notebook to make transfer learning to predict another classes.
+* Jupiter notebook to make transfer learning to predict another classes.
 * Use Nvidia NVENC encoder/decoder (Process video using GPU cuda cores) to increase video frame rate.
 * Rewrite yolo model to improve my understanding of the model.
