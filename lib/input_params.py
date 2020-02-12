@@ -1,6 +1,8 @@
 import argparse
 import os
 
+from lib.video import available_video_ports
+
 
 def intersection(lst1, lst2): return list(set(lst1) & set(lst2))
 
@@ -12,48 +14,37 @@ class NotFountFileError(Exception):
 class InputParamsResolver:
 
     def __init__(self):
-        parser = argparse.ArgumentParser(
-            prog="object-detector",
-            description='YOLO object detector :)'
-        )
-        parser.add_argument(
-            '--input-image',
-            help='path of an image file.'
-        )
-        parser.add_argument(
-            '--input-video',
-            help='path of a video file.'
-        )
+        parser = argparse.ArgumentParser(prog="object-detector", description='YOLO object detector :)')
+        parser.add_argument('--input-image', help='Path of an image file.')
+        parser.add_argument('--input-video', help='Path of a video file.')
+        parser.add_argument('--output', help='Path of an output file.')
         parser.add_argument(
             '--input-webcam',
-            help='get video streaming from camera port (Between 0 and N).',
-            type=int
-        )
-        parser.add_argument(
-            '--output',
-            help='path of an output file.'
+            help=f"Input video device port. Available: {', '.join(available_video_ports())} (/dev/videoX).",
+            type=int,
+            default=0
         )
         parser.add_argument(
             '--output-fps',
-            help='fps of output video. Ofter use with webcam input videos',
+            help='Output video FPS. Ofter use with webcam input videos',
             type=int,
             default=30
         )
         parser.add_argument(
             '--show-preview',
-            help='show a preview on a system window.',
+            help='Show preview window.',
             action='store_true',
             default=False
         )
         parser.add_argument(
             '--preview-width',
-            help='preview window width.',
+            help='Preview window width.',
             type=int,
             default=1500
         )
         parser.add_argument(
             '--predict-bounding-boxes',
-            help='predict & plot bounding boxes',
+            help='Predict & plot bounding boxes',
             action='store_true',
             default=False
         )

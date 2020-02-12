@@ -9,7 +9,7 @@ from lib.input_params import InputParamsResolver
 from lib.keyboard import Keyboard
 from lib.object_detector.object_detector_factory import ObjectDetectorFactory
 from lib.object_detector.settings import Settings
-from lib.video import VideoReader, VideoWriter
+from lib.video import VideoReader, VideoWriter, assert_video_port_availability
 
 
 def create_reader(params):
@@ -18,7 +18,7 @@ def create_reader(params):
     elif 'input_video' in params:
         return VideoReader(params['input_video'])
     elif 'input_webcam' in params:
-        return VideoReader(params['input_webcam'])
+        return VideoReader(assert_video_port_availability(params['input_webcam']))
 
 
 def create_input_output():

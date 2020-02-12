@@ -23,12 +23,13 @@ def available_video_ports():
 
 def assert_video_port_availability(video_port):
     available_ports = available_video_ports()
-    assert str(video_port) in available_ports, f"Video port {video_port} is not available!. Use any of these: {' or '.join(available_ports)}."
+    is_available = str(video_port) in available_ports
+    assert is_available, f"Video port {video_port} is not available!. Use any of these: {' or '.join(available_ports)}."
+    return video_port
 
 
 class VideoReader:
     def __init__(self, video_port=0):
-        assert_video_port_availability(video_port)
         self.reader = cv2.VideoCapture(video_port)
 
     def next(self, flip=False):

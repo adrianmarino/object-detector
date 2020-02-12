@@ -103,7 +103,7 @@ object-detector \
     --show-preview
 ```
 
-Note: `--input-webcam 0` is the laptop integrated webcam port but can use another port like: 1, 2, 3...N.
+**Note**: `--input-webcam`: `0` is the integrated laptop webcam video port number, but also you can use another ports for external webcams or external video input devices. Values: From 0 to N.
 
 * Press **ESC** key to end process. When input is a video this end process before process all video.
 
@@ -111,7 +111,38 @@ Note: `--input-webcam 0` is the laptop integrated webcam port but can use anothe
 
 ```bash
 object-detector --help
+
+$ object-detector --help
+usage: object-detector [-h] [--input-image INPUT_IMAGE]
+                       [--input-video INPUT_VIDEO] [--output OUTPUT]
+                       [--input-webcam INPUT_WEBCAM] [--output-fps OUTPUT_FPS]
+                       [--show-preview] [--preview-width PREVIEW_WIDTH]
+                       [--predict-bounding-boxes]
+
+YOLO object detector :)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --input-image INPUT_IMAGE
+                        Path of an image file.
+  --input-video INPUT_VIDEO
+                        Path of a video file.
+  --output OUTPUT       Path of an output file.
+  --input-webcam INPUT_WEBCAM
+                        Input video device port. Available: 0, 2
+                        (/dev/videoX).
+  --output-fps OUTPUT_FPS
+                        Output video FPS. Ofter use with webcam input videos
+  --show-preview        Show preview window.
+  --preview-width PREVIEW_WIDTH
+                        Preview window width.
+  --predict-bounding-boxes
+                        Predict & plot bounding boxes
 ```
+
+**Note**:You can see that `--input-webcam` description shows video ports of currently active devices. In this case:
+* `0`: Integrated laptop webcam.
+* `2`: External USB webcam.
 
 ## Known issues
 
