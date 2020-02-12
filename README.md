@@ -34,6 +34,7 @@
 * [anaconda](https://www.anaconda.com/download/#linux)
 * 7z
 * A respectable video card (i.e. GeForce GTX 1060 or higher)
+* Tested on linux
 
 ## Setup
 
@@ -91,7 +92,7 @@ python object-detector.py params
 * Detect objects in an image:
 
     ```bash
-    object-detector \s
+    object-detector \
         --input-image input/image.jpg \
         --output output/processed_image.jpg \
         --predict-bounding-boxes
@@ -147,7 +148,7 @@ python object-detector.py params
                             Input video device port. Available: 0, 2
                             (/dev/videoX).
       --output-fps OUTPUT_FPS
-                            Output video FPS. Ofter use with webcam input videos
+                            Output video FPS. Often used with webcam input videos
       --show-preview        Show preview window.
       --preview-width PREVIEW_WIDTH
                             Preview window width.

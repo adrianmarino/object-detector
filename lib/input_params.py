@@ -26,7 +26,7 @@ class InputParamsResolver:
         )
         parser.add_argument(
             '--output-fps',
-            help='Output video FPS. Ofter use with webcam input videos',
+            help='Output video FPS. Often used with webcam input videos',
             type=int,
             default=30
         )
