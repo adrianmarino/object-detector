@@ -11,14 +11,12 @@
 
 **Webcam Screenshot**
 
-![Webcam Screenshot](https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png)
+<img src="https://raw.githubusercontent.com/adrianmarino/object-detector/master/images/webcam.png" alt="Webcam Screenshot" width="60">
 
-
-### Pending issues
+### Pending tasks
 
 * Python notebook to make transfer learning to predict another classes.
-* Only use open-cv to process images to increase fps.
-* Rewrite bounding boxes building
+* Use nvenc (nvidia gup video coder/decoder) to increase video frame rate.
 * Rewrite yolo model to improve my understanding of process.
 
 ## Requeriments
