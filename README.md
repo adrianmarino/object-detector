@@ -126,8 +126,6 @@ python object-detector.py params
 * To view all options:
 
     ```bash
-    object-detector --help
-    
     $ object-detector --help
     usage: object-detector [-h] [--input-image INPUT_IMAGE]
                            [--input-video INPUT_VIDEO] [--output OUTPUT]
@@ -145,7 +143,7 @@ python object-detector.py params
                             Path of a video file.
       --output OUTPUT       Path of an output file.
       --input-webcam INPUT_WEBCAM
-                            Input video device port. Available: 0, 2
+                            Input video port. Available ports: [0, 2]
                             (/dev/videoX).
       --output-fps OUTPUT_FPS
                             Output video FPS. Often used with webcam input videos

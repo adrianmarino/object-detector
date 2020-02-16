@@ -18,12 +18,7 @@ class InputParamsResolver:
         parser.add_argument('--input-image', help='Path of an image file.')
         parser.add_argument('--input-video', help='Path of a video file.')
         parser.add_argument('--output', help='Path of an output file.')
-        parser.add_argument(
-            '--input-webcam',
-            help=f"Input video device port. Available: {', '.join(available_video_ports())} (/dev/videoX).",
-            type=int,
-            default=0
-        )
+        parser.add_argument('--input-webcam', help=self.__input_webcam_info(), type=int, default=0)
         parser.add_argument(
             '--output-fps',
             help='Output video FPS. Often used with webcam input videos',
@@ -49,6 +44,12 @@ class InputParamsResolver:
             default=False
         )
         self.parser = parser
+
+    @staticmethod
+    def __input_webcam_info():
+        available_ports = available_video_ports()
+        ports_info = f'Available ports: [{", ".join(available_ports)}]' if len(available_ports) > 0 else 'Not found active ports'
+        return f"Input video port. {ports_info} (Detected & non-used /dev/videoX port)."
 
     @property
     def params(self):
